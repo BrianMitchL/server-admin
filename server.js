@@ -14,23 +14,29 @@ server.on('request', function (req, res) {
   const route = url.parse(req.url).pathname;
 
   if (req.method === 'GET' && route === '/uptime') {
+    console.log(`${new Date()} ${route}`);
     return uptime((err, stdout, stderr) => {
       res.statusCode = err ? 500 : 200;
       res.end(err ? err.toString() : stdout);
+      console.error(err);
     });
   }
 
   if (req.method === 'GET' && route === '/power-off') {
+    console.log(`${new Date()} ${route}`);
     return poweroff((err, stdout, stderr) => {
       res.statusCode = err ? 500 : 200;
       res.end(err ? err.toString() : stdout);
+      console.error(err);
     });
   }
 
   if (req.method === 'GET' && route === '/restart-plex') {
+    console.log(`${new Date()} ${route}`);
     return systemd('restart', 'plexmediaserver', (err, stdout, stderr) => {
       res.statusCode = err ? 500 : 200;
       res.end(err ? err.toString() : stdout);
+      console.error(err);
     });
   }
 

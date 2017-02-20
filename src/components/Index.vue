@@ -1,9 +1,9 @@
 <template>
   <div class="index">
-    <uptime/>
+    <uptime v-if="poweredOn"></uptime>
     <p class="info" v-if="info !== ''">{{ info }}</p>
-    <button v-on:click="powerOff">Power off</button>
-    <button v-on:click="restartPlex">Restart Plex</button>
+    <button v-if="poweredOn" v-on:click="powerOff">Power off</button>
+    <button v-if="poweredOn" v-on:click="restartPlex">Restart Plex</button>
   </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   name: 'index',
   data () {
     return {
-      info: ''
+      info: '',
+      poweredOn: true
     }
   },
   components: {
@@ -22,15 +23,19 @@ export default {
   },
   methods: {
     powerOff: function () {
+      this.info = 'Shutting down...'
+      this.poweredOn = false
       this.$http.get('/power-off').then((response) => {
         console.log(response)
-        this.info = 'Shutting down...'
       })
     },
     restartPlex: function () {
+      this.info = 'Restarting Plex...'
+      setTimeout(() => {
+        this.info = ''
+      }, 5000)
       this.$http.get('/restart-plex').then((response) => {
         console.log(response)
-        this.info = 'Restarting Plex...'
       })
     }
   }
@@ -41,12 +46,24 @@ export default {
 <style lang="scss" scoped>
 .index {
   height: 100vh;
-  width: 100vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   align-items: stretch;
-  font-size: 1.2rem;
+  font-size: 2rem;
+}
+
+@media all and (max-width: 767px) {
+  .index {
+    margin: 0 2vw;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .index {
+    margin: 0 15vw;
+    font-size: 2.5rem;
+  }
 }
 
 .uptime, .info {
@@ -56,7 +73,7 @@ export default {
 button {
   flex: 2 0 0;
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   padding: 0.5rem 1rem;
   color: #ffffff;
   border: none rgba(0, 0, 0, 0);
