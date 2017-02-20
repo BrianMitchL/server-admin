@@ -34,3 +34,17 @@ npm run serve
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## Run via systemd
+
+If you want to run this from systemd:
+
+```bash
+# install dependencies
+npm install -g forever service-systemd
+```
+
+Edit `service.json` to fit your needs.
+
+Follow the instructions [in the documentation](https://github.com/simone-sanfratello/node-service-systemd) to properly run the service.

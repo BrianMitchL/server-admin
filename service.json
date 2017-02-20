@@ -1,0 +1,19 @@
+{
+  "name": "server-admin",
+  "description": "a simple service for managing a plex server",
+  "path": "/home/brianmitchell/Documents/server-admin/",
+  "env": {
+  },
+  "script": "server.js",
+  "args": "",
+  "pid": "/var/run/my-node-service.pid",
+  "log": "/var/log/my-node-service/log",
+  "error": "/var/log/my-node-service/error",
+  "wrap": "forever",
+  "wrap.bin": "/usr/bin/forever",
+  "logrotate": "logrotate",
+  "logrotate.rotate": "10",
+  "logrotate.frequency": "daily",
+  "user": "root",
+  "group": "root"
+}
