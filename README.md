@@ -4,6 +4,8 @@ A simple tool to manage server tasks.
 
 This is designed for my Linux server running Plex Media Server. It uses the command `uptime`, `shutdown`, and `systemd`. This should be run from a user that has the privilege to run all of these commands without a password. There are probably horrible things going on in terms of security, but I will only run this on a local network so ¯\\\_(ツ)\_/¯
 
+Configure which port to run on in `server.js`. This defaults to `80`. You will likely need to open that port in your firewall.
+
 ## Build Frontend Setup
 
 ``` bash
@@ -47,4 +49,18 @@ npm install -g forever service-systemd
 
 Edit `service.json` to fit your needs.
 
-Follow the instructions [in the documentation](https://github.com/simone-sanfratello/node-service-systemd) to properly run the service.
+```bash
+# install the service
+sudo node-systemd add service.json
+
+# start the serive
+sudo service server-admin start
+
+# stop the serive
+sudo service server-admin stop
+
+# restart the serive
+sudo service server-admin restart
+```
+
+Follow the instructions [in the documentation](https://github.com/simone-sanfratello/node-service-systemd) to learn more.
