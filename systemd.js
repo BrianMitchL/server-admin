@@ -2,7 +2,7 @@ const isLinux = require('is-linux');
 const cp = require('child_process');
 
 module.exports = function (command, service, cb) {
-  const cmd = `systemd ${command} ${service}`;
+  const cmd = `systemctl ${command} ${service}`;
 
   if(!isLinux()) {
     console.error('unsupported OS for systemd command');
