@@ -2,8 +2,8 @@
   <div class="index">
     <uptime/>
     <p class="info" v-if="info !== ''">{{ info }}</p>
-    <button id="power-off" v-on:click="powerOff">Power off</button>
-    <button id="restart-plex" v-on:click="restartPlex">Restart Plex</button>
+    <button v-on:click="powerOff">Power off</button>
+    <button v-on:click="restartPlex">Restart Plex</button>
   </div>
 </template>
 
@@ -24,13 +24,13 @@ export default {
     powerOff: function () {
       this.$http.get('/power-off').then((response) => {
         console.log(response)
-        this.info = response.body
+        this.info = 'Shutting down...'
       })
     },
     restartPlex: function () {
       this.$http.get('/restart-plex').then((response) => {
         console.log(response)
-        this.info = response.body
+        this.info = 'Restarting Plex...'
       })
     }
   }

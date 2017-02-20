@@ -5,7 +5,7 @@ const poweroff = require('power-off');
 const systemd = require('./systemd');
 const uptime = require('./uptime');
 
-const port = 5709;
+const port = 80;
 
 const fileServer = new _static.Server(__dirname + '/dist');
 const server = http.createServer();
